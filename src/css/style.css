@@ -1,0 +1,45 @@
+.column-3 {
+    width: 75%;
+    float: left;
+}
+
+.column-2 {
+    width: 50%;
+    float: left;
+}
+
+.column-1 {
+    width: 25%;
+    float: left;
+}
+
+
+button.calc-button {
+    width: 100%;
+    height: 100px;
+    border: 2px solid #ddd;
+    font-size: 32px;
+    color: #555;
+    background: #bbb;
+
+}
+input.result {
+    /* position: relative; */
+    height: 100px;
+    width: 100%;
+    font-size: 32px;
+    text-align: right;
+    margin-right: 50px;
+    /* border: 2px solid #eee; */
+    float: right;
+    max-width: 100vw;
+    border: none;
+}
+
+.floaty-last {
+    position: absolute;
+    color: #d0c6c6;
+    margin-top: 10px;
+    right: 50px;
+    font-weight: 900;
+}
