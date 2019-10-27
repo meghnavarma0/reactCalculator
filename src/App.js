@@ -7,7 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       current: "0",
-      previous: [],
+      previous: "",
       nextIsReset: false,
       
     }
@@ -16,36 +16,33 @@ class App extends React.Component {
   }
   
   reset = () => {
-    this.setState({current: '0', previous: [], nextIsReset: false});
+    this.setState({current: '0', previous: "", nextIsReset: false});
   }
 
   addToCurrent = (symbol) => {
-    // if(this.state.current === "0"){
-    //   this.setState({current: symbol})
-    // }
-    // else{
-      // if(this.state.operators.indexOf(symbol) > -1){
-      //   this.setState({
-      //     current:((this.state.previous[this.state.previous.length - 1 ] + symbol + this.state.current))
-      //   })
-      // }
+    let {current, previous} = this.state
+
+   
     if(["/", "*", "+", "-"].indexOf(symbol) > -1){
-      let {previous} = this.state
-      previous.push(this.state.current + symbol)
-      this.setState({previous, nextIsReset: true})
+
+      current = eval(String(previous + current))
+
+      previous=(this.state.previous + this.state.current + symbol)
+
+      this.setState({current: "0", previous, nextIsReset: true})
 
     }
     else{
 
       if((this.state.current === "0" && symbol !== ".")||this.state.nextIsReset)
       {
-
         this.setState({current: symbol, nextIsReset: false})
       }
       else{
+      previous = eval(String(previous + current))
 
 
-      this.setState({current:this.state.current + symbol, })
+      this.setState({current:this.state.current + symbol,previous,nextIsReset: true })
 
       }
 
@@ -55,8 +52,8 @@ class App extends React.Component {
   calculate = (symbol) => {
     let {current, previous, nextIsReset} = this.state;
     if(previous.length > 0){
-      current = eval(String(previous[previous.length - 1] + current))
-      this.setState({current, previous: [], nextIsReset: true})
+      current = eval(String(previous + current))
+      this.setState({current, previous: "", nextIsReset: true})
     }
   } 
   
@@ -117,9 +114,8 @@ class App extends React.Component {
     return(
       <div className="App">
         {this.state.previous.length > 0?
-        <div className="floaty-last">{this.state.previous[this.state.previous.length - 1]}</div>
-        
-      : null}
+        <div className="floaty-last">{this.state.previous}</div>
+        : null}
         
         <input type="text" className="result" value={this.state.current}/>
         <br/>
