@@ -39,10 +39,10 @@ class App extends React.Component {
         this.setState({current: symbol, nextIsReset: false})
       }
       else{
-      previous = eval(String(previous + current))
+    
 
 
-      this.setState({current:this.state.current + symbol,previous,nextIsReset: true })
+      this.setState({current:this.state.current + symbol,previous,nextIsReset: false })
 
       }
 
